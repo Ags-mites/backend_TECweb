@@ -31,6 +31,8 @@ namespace Backend.Persistence
             services.AddScoped<IVoucherRespository, VoucherRespository>();
             services.AddScoped<IVoucherTypeRepository, VoucherTypeRepository>();
             services.AddScoped<IWorkersRepository, WorkersRepository>();
+            services.AddScoped<IClientsFacRepository, ClientsFacRepository>();
+            services.AddScoped<ICiudadEntrFacRepository, CiudadEntrFacRepository>();
 
             return services;
         }
