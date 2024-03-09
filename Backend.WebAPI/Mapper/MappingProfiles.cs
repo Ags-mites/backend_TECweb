@@ -4,6 +4,7 @@ using Backend.DTOs.Account;
 using Backend.DTOs.Worker;
 using Backend.DTOs.ClientsFac;
 using Backend.DTOs.ReasonAdmission;
+using Backend.DTOs.AuditAM;
 using Backend.DTOs.AccountType;
 using Backend.Entities;
 
@@ -27,7 +28,8 @@ namespace Backend.WebAPI.Mapper
             CreateMap<ReasonAdmissionToCreateDTO, ReasonAdmission>();
             CreateMap<ReasonAdmissionToEditDTO, ReasonAdmission>();
             CreateMap<ReasonAdmission, ReasonAdmissionToListDTO>();
-
+            CreateMap<AuditAMToCreateDTO, AuditAM>();
+            CreateMap<AuditAM, AuditAMToCreateDTO>();
 
             //facturation
             CreateMap<ClientsFacToCreateDTO, ClientsFac>();
