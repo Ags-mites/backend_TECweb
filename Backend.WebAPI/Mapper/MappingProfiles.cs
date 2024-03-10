@@ -20,7 +20,9 @@ namespace Backend.WebAPI.Mapper
             //Contabilidad
             CreateMap<AccountToCreateDTO, Account>();
             CreateMap<AccountToEditDTO,Account>();
-            CreateMap<Account, AccountToListDTO>();
+            CreateMap<Account, AccountToListDTO>()
+                .ForMember(dest => dest.AccountTypeName, opt 
+                => opt.MapFrom(src => src.AccountType.Name));
             CreateMap<AccountTypeToCreateDTO, AccountType>();
             CreateMap<AccountTypeToEditDTO,AccountType>();
             CreateMap<AccountType, AccountTypeToListDTO>();
