@@ -20,6 +20,7 @@ namespace Backend.Persistence
         public DbSet<VoucherType> VoucherType { get; set; }
         public DbSet<Workers> Workers { get; set; }
         public DbSet<AuditAM> AuditAM { get; set; }
+        public DbSet<MR_ACTIVIDAD> MR_ACTIVIDAD { get; set; }
         // facturacion
         public DbSet<ClientsFac> ClientsFac { get; set; }
         public DbSet<CiudadEntrFac> CiudadEntrFac { get; set; }

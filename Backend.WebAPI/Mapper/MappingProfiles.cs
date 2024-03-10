@@ -5,7 +5,10 @@ using Backend.DTOs.Worker;
 using Backend.DTOs.ClientsFac;
 using Backend.DTOs.ReasonAdmission;
 using Backend.DTOs.AuditAM;
+using Backend.DTOs.MR_ACTIVIDAD;
 using Backend.DTOs.AccountType;
+using Backend.DTOs.PayrollDetail;
+using Backend.DTOs.PayrollHeader;
 using Backend.Entities;
 
 namespace Backend.WebAPI.Mapper
@@ -14,6 +17,7 @@ namespace Backend.WebAPI.Mapper
     {
         public  MappingProfiles()
         {
+            //Contabilidad
             CreateMap<AccountToCreateDTO, Account>();
             CreateMap<AccountToEditDTO,Account>();
             CreateMap<Account, AccountToListDTO>();
@@ -28,8 +32,16 @@ namespace Backend.WebAPI.Mapper
             CreateMap<ReasonAdmissionToCreateDTO, ReasonAdmission>();
             CreateMap<ReasonAdmissionToEditDTO, ReasonAdmission>();
             CreateMap<ReasonAdmission, ReasonAdmissionToListDTO>();
+            CreateMap<PayrollDetailToCreateDTO, PayrollDetail>();
+            CreateMap<PayrollDetailToEditDTO, PayrollDetail>();
+            CreateMap<PayrollDetail, PayrollDetailToListDTO>();
+            CreateMap<PayrollHeaderToCreateDTO, PayrollHeader>();
+            CreateMap<PayrollHeaderToEditDTO, PayrollHeader>();
+            CreateMap<PayrollHeader, PayrollHeaderToListDTO>();
             CreateMap<AuditAMToCreateDTO, AuditAM>();
             CreateMap<AuditAM, AuditAMToCreateDTO>();
+            CreateMap<MR_ACTIVIDADToCreateDTO, MR_ACTIVIDAD>();
+            CreateMap<MR_ACTIVIDAD, MR_ACTIVIDADToCreateDTO>();
 
             //facturation
             CreateMap<ClientsFacToCreateDTO, ClientsFac>();
