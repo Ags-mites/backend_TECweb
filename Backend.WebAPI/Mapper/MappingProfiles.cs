@@ -9,6 +9,9 @@ using Backend.DTOs.MR_ACTIVIDAD;
 using Backend.DTOs.AccountType;
 using Backend.DTOs.PayrollDetail;
 using Backend.DTOs.PayrollHeader;
+using Backend.DTOs.Movements;
+using Backend.DTOs.Voucher;
+using Backend.DTOs.VoucherType;
 using Backend.Entities;
 
 namespace Backend.WebAPI.Mapper
@@ -26,6 +29,15 @@ namespace Backend.WebAPI.Mapper
             CreateMap<AccountTypeToCreateDTO, AccountType>();
             CreateMap<AccountTypeToEditDTO,AccountType>();
             CreateMap<AccountType, AccountTypeToListDTO>();
+            CreateMap<MovementToCreateDTO, Movement>();
+            CreateMap<MovementToEditDTO,Movement>();
+            CreateMap<Movement, MovementToListDTO>();
+            CreateMap<VoucherToCreateDTO, Voucher>();
+            CreateMap<VoucherToEditDTO,Voucher>();
+            CreateMap<Voucher, VoucherToListDTO>();
+            CreateMap<VoucherTypeToCreateDTO, VoucherType>();
+            CreateMap<VoucherTypeToEditDTO,VoucherType>();
+            CreateMap<VoucherType, VoucherTypeToListDTO>();
 
             //Nomina
             CreateMap<WorkerToCreateDTO, Workers>();

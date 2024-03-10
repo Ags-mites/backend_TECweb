@@ -7,10 +7,10 @@ namespace Backend.Entities
         public required string CodeVoucher { get; set; }
         public string? DescriptionVoucher { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public int IdVoucherType { get; set; }
-        public int IdMovement { get; set; }
+        public int VoucherTypeId { get; set; }
+        public int MovementId { get; set; }
         public required VoucherType VoucherTypes { get; set; }
         public required Movement Movements { get; set; }
     }
