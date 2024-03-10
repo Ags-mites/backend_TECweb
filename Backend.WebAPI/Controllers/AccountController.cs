@@ -1,6 +1,7 @@
 using System.Data;
 using AutoMapper;
 using Backend.DTOs.Account;
+using Backend.DTOs.AccountType;
 using Backend.Entities;
 using Backend.Persistence.Interfaces;
 using Microsoft.AspNetCore.Mvc;
