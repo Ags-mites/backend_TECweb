@@ -13,7 +13,9 @@ namespace Backend.Entities
                 
         public int AccountId { get; set; }
         public int AccountTypeId { get; set; }
+        public int VoucherId { get; set; }
         public Account Accounts { get; set; }
         public AccountType AccountType { get; set; }
+        public required Voucher Voucher { get; set; }
     }
 }
