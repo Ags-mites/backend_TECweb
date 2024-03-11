@@ -3,9 +3,9 @@ using Backend.Persistence.Interfaces;
 
 namespace Backend.Persistence.Repositories
 {
-    public class CobradorCXCRepository: BaseRepository<CobradorCXC>, ICobradorCXCRepository
+    public class JabdActividadRepository: BaseRepository<JabdActividad>, IJabdActividadRepository
     {
-        public CobradorCXCRepository(DataContext context)
+        public JabdActividadRepository(DataContext context)
         :base(context)
         {
             

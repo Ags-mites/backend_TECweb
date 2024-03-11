@@ -22,9 +22,15 @@ namespace Backend.Persistence
         // facturacion
         public DbSet<ClientsFac> ClientsFac { get; set; }
         public DbSet<CiudadEntrFac> CiudadEntrFac { get; set; }
-        //CXC
-        public DbSet<CobradorCXC> CobradorCXC { get; set; }
+        //CX
         public DbSet<FormaDePagoCXC> FormaDePagoCXC { get; set; }
+        //JabdActividad
+        public DbSet<JabdActividad> JabdActividad { get; set; }        
+        //Cabecera
+        public DbSet<CobradorCuentasCobrar> CobradorCuentasCobrar { get; set; }     
+
+
+
 
     }
 }

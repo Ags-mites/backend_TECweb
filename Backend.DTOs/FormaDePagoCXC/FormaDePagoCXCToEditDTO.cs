@@ -6,6 +6,5 @@ namespace Backend.DTOs.FormaDePagoCXC
         public required string Codigo { get; set; }
         public required string NombreForma { get; set; }
         
-        public int CobradorCXCId { get; set; }
     }
 }

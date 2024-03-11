@@ -2,7 +2,7 @@ using Backend.Entities;
 
 namespace Backend.Persistence.Interfaces
 {
-    public interface ICobradorCXCRepository: IBaseRepository<CobradorCXC>
+    public interface IJabdActividadRepository: IBaseRepository<JabdActividad>
     {
         
     }

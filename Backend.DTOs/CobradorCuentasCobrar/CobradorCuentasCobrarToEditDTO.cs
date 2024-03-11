@@ -1,14 +1,11 @@
-namespace Backend.DTOs.CobradorCXC
+namespace Backend.DTOs.CobradorCuentasCobrar
 {
-    public class CobradorCXCToListDTO
+    public class CobradorCuentasCobrarToEditDTO
     {
         public int Id { get; set; }
         public required string Cedula { get; set; }
         public required string NombreCobrador { get; set; }
         public required string Direccion { get; set; }
-        public required string Prueba { get; set; }
 
-        public DateTime CreatedAt { get; set; }    
-        
     }
 }

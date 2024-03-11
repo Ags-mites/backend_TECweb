@@ -39,7 +39,6 @@ namespace Backend.WebAPI.Controllers {
         public async Task <IActionResult> Post(Dtos.FormaDePagoCXCToCreateDTO formaDePagocxcToCreateDTO)
         {
             var formaDePagocxcToCreate = _mapper.Map<FormaDePagoCXC>(formaDePagocxcToCreateDTO);
-            formaDePagocxcToCreate.CreatedAt = DateTime.Now;
             var formaDePagocxcCreated = await _formaDePagocxcRepository.AddAsync(formaDePagocxcToCreate);
             var formaDePagocxcCreateDTO = _mapper.Map<Dtos.FormaDePagoCXCToListDTO>(formaDePagocxcCreated);
             return Ok(formaDePagocxcCreateDTO);
@@ -59,7 +58,6 @@ namespace Backend.WebAPI.Controllers {
             }
 
             _mapper.Map(formaDePagoCXCToEditDTO,formaPagoToUpdate);
-            formaPagoToUpdate.UpdatedAt = DateTime.Now;
             var updated = await _formaDePagocxcRepository.UpdateAsync( id ,formaPagoToUpdate);
             if(!updated){
                 return NoContent();

@@ -2,8 +2,10 @@ using AutoMapper;
 using Backend.DTOs;
 using Backend.DTOs.Account;
 using Backend.DTOs.ClientsFac;
-using Backend.DTOs.CobradorCXC;
+using Backend.DTOs.CobradorCuentasCobrar;
 using Backend.DTOs.FormaDePagoCXC;
+using Backend.DTOs.JabdActividad;
+using Backend.DTOs.CabeceraCXC;
 using Backend.Entities;
 
 
@@ -21,12 +23,20 @@ namespace Backend.WebAPI.Mapper
             CreateMap<ClientsFacToEditDTO,ClientsFac>();
             CreateMap<ClientsFac, ClientsFacToListDTO>();
             //CXC
-            CreateMap<CobradorCXCToCreateDTO, CobradorCXC>();
-            CreateMap<CobradorCXCToEditDTO,CobradorCXC>();
-            CreateMap<CobradorCXC, CobradorCXCToListDTO>();
+            CreateMap<CobradorCuentasCobrarToCreateDTO, CobradorCuentasCobrar>();
+            CreateMap<CobradorCuentasCobrarToEditDTO,CobradorCuentasCobrar>();
+            CreateMap<CobradorCuentasCobrar, CobradorCuentasCobrarToListDTO>();
+            
             CreateMap<FormaDePagoCXCToCreateDTO, FormaDePagoCXC>();
             CreateMap<FormaDePagoCXCToEditDTO,FormaDePagoCXC>();
-            CreateMap<FormaDePagoCXC, FormaDePagoCXCToListDTO>();           
+            CreateMap<FormaDePagoCXC, FormaDePagoCXCToListDTO>();
+            //JabdActividad
+            CreateMap<JabdActividadToCreateDTO, JabdActividad>();
+            CreateMap<JabdActividad, JabdActividadToListDTO>();        
+            //Cabecera
+            CreateMap<CabeceraCXCToCreateDTO, CabeceraCXC>();
+            CreateMap<CabeceraCXCToEditDTO,CabeceraCXC>();
+            CreateMap<CabeceraCXC, CabeceraCXCToListDTO>();        
 
         }
     }
