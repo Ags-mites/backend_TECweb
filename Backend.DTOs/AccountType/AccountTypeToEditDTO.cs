@@ -1,7 +1,8 @@
 namespace Backend.DTOs.AccountType
 {
-    public class AccountTypeToCreateDTO
+    public class AccountTypeToEditDTO
     {
+        public int Id { get; set; }
         public required string Code { get; set; }
         public required string Name { get; set; }
         public required string Status { get; set; }

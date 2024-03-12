@@ -3,9 +3,9 @@ using Backend.Persistence.Interfaces;
 
 namespace Backend.Persistence.Repositories
 {
-    public class AccountTypeRepository: BaseRepository<AccountType>, IAccountTypeRepository
+    public class AuditRepository: BaseRepository<AuditAM>, IAuditAMRepository
     {
-        public AccountTypeRepository(DataContext context)
+        public AuditRepository (DataContext context)
         :base(context)
         {
 
