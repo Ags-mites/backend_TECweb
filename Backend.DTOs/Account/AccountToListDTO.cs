@@ -8,5 +8,7 @@ namespace Backend.DTOs.Account
         public required string Status { get; set; }
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int  AccountTypeId { get; set; }
+        public string AccountTypeName { get; set; }=string.Empty;
     }
 }

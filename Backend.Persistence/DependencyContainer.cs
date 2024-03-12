@@ -37,10 +37,10 @@ namespace Backend.Persistence
             services.AddScoped<IJabdActividadRepository, JabdActividadRepository>();
             services.AddScoped<ICabeceraCXCRepository, CabeceraCXCRepository>();
             services.AddScoped<ICobradorCuentasCobrarRepository, CobradorCuentasCobrarRepository>();
-
-
-
-
+            services.AddScoped<ISilcActividadRepository, SilcActividadRepository>();
+            services.AddScoped<IFacturacionClienteRepository, FacturacionClienteRepository>();
+            services.AddScoped<IAuditAMRepository, AuditRepository>();
+            services.AddScoped<IMR_ACTIVIDADRepository, MR_ACTIVIDADRepository>();
             return services;
         }
     }

@@ -1,6 +1,8 @@
+using Backend.Entities;
+
 namespace Backend.Persistence.Interfaces
 {
-    public interface ICiudadEntrFacRepository: IBaseRepository<ICiudadEntrFacRepository>
+    public interface ICiudadEntrFacRepository: IBaseRepository<CiudadEntrFac>
     {
         
     }
