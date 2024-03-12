@@ -2,7 +2,6 @@ namespace Backend.DTOs.PayrollDetail
 {
     public class PayrollDetailToCreateDTO
     {
-public int Id { get; set; }
         public int ReasonId { get; set; }
         public int PayrollId { get; set; }
         public decimal Price { get; set; }
