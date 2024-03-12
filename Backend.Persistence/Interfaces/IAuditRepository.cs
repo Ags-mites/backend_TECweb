@@ -2,7 +2,7 @@ using Backend.Entities;
 
 namespace Backend.Persistence.Interfaces
 {
-    public interface IAccountTypeRepository: IBaseRepository<AccountType>
+    public interface IAuditAMRepository: IBaseRepository<AuditAM>
     {
         
     }

@@ -12,7 +12,7 @@ namespace Backend.Entities
         
 
         public int AccountTypeId { get; set; }
-        public AccountType? AccountType { get; set; }
-
+        public AccountType AccountType { get; set; }
+    
     }
 }
