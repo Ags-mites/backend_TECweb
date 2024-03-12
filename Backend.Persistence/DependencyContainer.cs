@@ -33,6 +33,10 @@ namespace Backend.Persistence
             services.AddScoped<IWorkersRepository, WorkersRepository>();
             services.AddScoped<IClientsFacRepository, ClientsFacRepository>();
             services.AddScoped<ICiudadEntrFacRepository, CiudadEntrFacRepository>();
+            services.AddScoped<IFormaDePagoCXCRepository, FormaDePagoCXCRepository>();
+            services.AddScoped<IJabdActividadRepository, JabdActividadRepository>();
+            services.AddScoped<ICabeceraCXCRepository, CabeceraCXCRepository>();
+            services.AddScoped<ICobradorCuentasCobrarRepository, CobradorCuentasCobrarRepository>();
             services.AddScoped<ISilcActividadRepository, SilcActividadRepository>();
             services.AddScoped<IFacturacionClienteRepository, FacturacionClienteRepository>();
             services.AddScoped<IAuditAMRepository, AuditRepository>();
