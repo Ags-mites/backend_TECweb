@@ -10,5 +10,6 @@ namespace Backend.DTOs.Movements
         public int AccountId { get; set; }
         public int AccountTypeId { get; set; }
         public DateTime CreatedAt { get; set; }
+        public int VoucherId { get; set; }
     }
 }

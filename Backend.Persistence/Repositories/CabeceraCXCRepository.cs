@@ -3,12 +3,12 @@ using Backend.Persistence.Interfaces;
 
 namespace Backend.Persistence.Repositories
 {
-    public class CiudadEntrFacRepository: BaseRepository<CiudadEntrFac>, ICiudadEntrFacRepository
+    public class CabeceraCXCRepository: BaseRepository<CabeceraCXC>, ICabeceraCXCRepository
     {
-        public CiudadEntrFacRepository(DataContext context)
+        public CabeceraCXCRepository(DataContext context)
         :base(context)
         {
-
+            
         }
     }
 }

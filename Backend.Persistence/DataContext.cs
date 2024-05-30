@@ -9,7 +9,7 @@ namespace Backend.Persistence
         {
             
         }
-
+        public DbSet<SilcActividad> SilcActividad { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<AccountType> AccountType { get; set; }
         public DbSet<Movement> Movement { get; set; }
@@ -24,7 +24,16 @@ namespace Backend.Persistence
         // facturacion
         public DbSet<ClientsFac> ClientsFac { get; set; }
         public DbSet<CiudadEntrFac> CiudadEntrFac { get; set; }
-         
-
+        //CX
+        public DbSet<FormaDePagoCXC> FormaDePagoCXC { get; set; }
+        //JabdActividad
+        public DbSet<JabdActividad> JabdActividad { get; set; }        
+        //Cabecera
+        public DbSet<CobradorCuentasCobrar> CobradorCuentasCobrar { get; set; }     
+        public DbSet<FacturacionCliente> FacturacionCliente { get; set; }
+        //  protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<FacturacionCliente>().HasNoKey();
+        // }
     }
 }
