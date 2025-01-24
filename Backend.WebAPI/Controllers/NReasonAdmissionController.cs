@@ -11,12 +11,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ReasonAdmissionController : ControllerBase
+    public class NReasonAdmissionController : ControllerBase
     {
         private readonly  IReasonAdmissionRepository _reasonAdmissionRepository;
         private readonly IMapper _mapper;
 
-        public ReasonAdmissionController(IReasonAdmissionRepository reasonAdmissionRepository, IMapper mapper)
+        public NReasonAdmissionController(IReasonAdmissionRepository reasonAdmissionRepository, IMapper mapper)
         {
             _reasonAdmissionRepository = reasonAdmissionRepository;
             _mapper=mapper;

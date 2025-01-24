@@ -11,12 +11,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class PayrollDetailController : ControllerBase
+    public class NPayrollDetailController : ControllerBase
     {
         private readonly IPayrollDetailRepository _PayrollDetailRepository;
         private readonly IMapper _mapper;
 
-        public PayrollDetailController(IPayrollDetailRepository PayrollDetailRepository, IMapper mapper)
+        public NPayrollDetailController(IPayrollDetailRepository PayrollDetailRepository, IMapper mapper)
         {
             _PayrollDetailRepository = PayrollDetailRepository;
             _mapper=mapper;

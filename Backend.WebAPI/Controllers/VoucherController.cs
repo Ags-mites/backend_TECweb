@@ -11,12 +11,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class VoucherController : ControllerBase
+    public class voucherController : ControllerBase
     {
         private readonly IVoucherRespository _voucherRepository;
         private readonly IMapper _mapper;
 
-        public VoucherController(IVoucherRespository voucherRepository, IMapper mapper)
+        public voucherController(IVoucherRespository voucherRepository, IMapper mapper)
         {
             _voucherRepository = voucherRepository;
             _mapper=mapper;

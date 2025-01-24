@@ -10,12 +10,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class ClientsFacController : ControllerBase
+    public class FClientsFacController : ControllerBase
     {
         private readonly IClientsFacRepository _clientsFacRepository;
         private readonly IMapper _mapper;
 
-        public ClientsFacController(IClientsFacRepository clientsFacRepository, IMapper mapper)
+        public FClientsFacController(IClientsFacRepository clientsFacRepository, IMapper mapper)
         {
             _clientsFacRepository = clientsFacRepository;
             _mapper=mapper;

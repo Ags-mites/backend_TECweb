@@ -69,21 +69,7 @@ namespace Backend.WebAPI.Mapper
             CreateMap<ClientsFacToCreateDTO, ClientsFac>();
             CreateMap<ClientsFacToEditDTO,ClientsFac>();
             CreateMap<ClientsFac, ClientsFacToListDTO>();
-            //CXC
-            CreateMap<CobradorCuentasCobrarToCreateDTO, CobradorCuentasCobrar>();
-            CreateMap<CobradorCuentasCobrarToEditDTO,CobradorCuentasCobrar>();
-            CreateMap<CobradorCuentasCobrar, CobradorCuentasCobrarToListDTO>();
-            
-            CreateMap<FormaDePagoCXCToCreateDTO, FormaDePagoCXC>();
-            CreateMap<FormaDePagoCXCToEditDTO,FormaDePagoCXC>();
-            CreateMap<FormaDePagoCXC, FormaDePagoCXCToListDTO>();
-            //JabdActividad
-            CreateMap<JabdActividadToCreateDTO, JabdActividad>();
-            CreateMap<JabdActividad, JabdActividadToListDTO>();        
-            //Cabecera
-            CreateMap<CabeceraCXCToCreateDTO, CabeceraCXC>();
-            CreateMap<CabeceraCXCToEditDTO,CabeceraCXC>();
-            CreateMap<CabeceraCXC, CabeceraCXCToListDTO>();        
+                    
             //simple page 2
             CreateMap<CiudadEntrFacToCreateDTO, CiudadEntrFac>();
             CreateMap<CiudadEntrFac, CiudadEntrFacToListDTO>();

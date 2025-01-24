@@ -12,12 +12,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class CAccountController : ControllerBase
+    public class accountController : ControllerBase
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
-        public CAccountController(IAccountRepository accountRepository, IMapper mapper)
+        public accountController(IAccountRepository accountRepository, IMapper mapper)
         {
             _accountRepository = accountRepository;
             _mapper=mapper;

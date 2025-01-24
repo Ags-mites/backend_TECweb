@@ -10,12 +10,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class CiudadEntrFacController : ControllerBase
+    public class FCiudadEntrFacController : ControllerBase
     {
         private readonly ICiudadEntrFacRepository _ciudadEntrFacRepository;
         private readonly IMapper _mapper;
 
-        public CiudadEntrFacController(ICiudadEntrFacRepository ciudadEntrFacRepository, IMapper mapper)
+        public FCiudadEntrFacController(ICiudadEntrFacRepository ciudadEntrFacRepository, IMapper mapper)
         {
             _ciudadEntrFacRepository = ciudadEntrFacRepository;
             _mapper=mapper;

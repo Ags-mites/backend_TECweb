@@ -11,12 +11,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class WorkerController : ControllerBase
+    public class NWorkerController : ControllerBase
     {
         private readonly IWorkersRepository _workersRepository;
         private readonly IMapper _mapper;
 
-        public WorkerController(IWorkersRepository workersRepository, IMapper mapper)
+        public NWorkerController(IWorkersRepository workersRepository, IMapper mapper)
         {
             _workersRepository = workersRepository;
             _mapper=mapper;

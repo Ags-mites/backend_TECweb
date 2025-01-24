@@ -11,12 +11,12 @@ namespace Backend.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class MovementController: ControllerBase
+    public class NMovementController: ControllerBase
     {
         private readonly IMovementRepository _movementRepository;
         private readonly IMapper _mapper;
 
-        public MovementController(IMovementRepository movementRepository, IMapper mapper)
+        public NMovementController(IMovementRepository movementRepository, IMapper mapper)
         {
             _movementRepository = movementRepository;
             _mapper=mapper;
