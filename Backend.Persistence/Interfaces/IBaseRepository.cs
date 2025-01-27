@@ -10,5 +10,6 @@ namespace Backend.Persistence.Interfaces
             Task<bool> UpdateAsync( int id, T entities );
             Task<bool> DeleteAsync( int id );
             Task<bool> DeleteAsync( T TEntity );
-        }
+            IQueryable<T> GetQueryable();
+    }
 }

@@ -24,11 +24,15 @@ namespace Backend.WebAPI.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult> GetAllAccounts()
+        public async Task<IActionResult> GetAllAccountsWithTypes()
         {
-            var accounts =  await _accountRepository.GetAllAsync();
-            var accountDto = _mapper.Map<List<Dtos.AccountToListDTO>>(accounts);
-            return Ok(accountDto);
+            var accounts = await _accountRepository
+                .GetQueryable()
+                .Include(a => a.AccountType)
+                .ToListAsync();
+
+            var accountsWithTypesDto = _mapper.Map<List<AccountToListDTO>>(accounts);
+            return Ok(accountsWithTypesDto);
         }
 
         [HttpGet("{id}")]
@@ -42,35 +46,50 @@ namespace Backend.WebAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> Post(Dtos.AccountToCreateDTO accountToCreateDTO)
         {
-            var accountToCreate = _mapper.Map<Account>(accountToCreateDTO);
-            accountToCreate.CreatedAt = DateTime.Now;
-            var accountCreated = await _accountRepository.AddAsync(accountToCreate);
-            var accountCreateDTO = _mapper.Map<Dtos.AccountToListDTO>(accountCreated);
-            return Ok(accountCreateDTO);
+            var account = _mapper.Map<Account>(accountToCreateDTO);
+            account.CreatedAt = DateTime.Now;
+            var createdAccount = await _accountRepository.AddAsync(account);
+            var fullAccount = await _accountRepository
+                .GetQueryable()
+                .Include(a => a.AccountType)
+                .FirstOrDefaultAsync(a => a.Id == createdAccount.Id);
+            var accountDto = _mapper.Map<AccountToListDTO>(fullAccount);
+            return CreatedAtAction(nameof(GetAllAccountsWithTypes), new { id = accountDto.Id }, accountDto);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put (int id, Dtos.AccountToEditDTO accountToEditDTO)
         {
-            if(id != accountToEditDTO.Id)
+            if (id != accountToEditDTO.Id)
             {
-                return  BadRequest("Error en los datos de entrada");
+                return BadRequest("El ID proporcionado no coincide con el objeto.");
             }
+
             var accountToUpdate = await _accountRepository.GetByIdAsync(id);
-            if(accountToUpdate is null)
+
+            if (accountToUpdate == null)
             {
-                return BadRequest("Id no encontrado");
+                return NotFound("La cuenta no fue encontrada.");
             }
-            
-            _mapper.Map(accountToEditDTO,accountToUpdate);
+
+            _mapper.Map(accountToEditDTO, accountToUpdate);
             accountToUpdate.UpdatedAt = DateTime.Now;
-            var updated = await _accountRepository.UpdateAsync( id ,accountToUpdate);
-            if(!updated){
-                return NoContent();
+
+            var updated = await _accountRepository.UpdateAsync(id, accountToUpdate);
+
+            if (!updated)
+            {
+                return StatusCode(500, "Error al actualizar la cuenta.");
             }
-            var account = await _accountRepository.GetByIdAsync(id);
-            var accountDTO = _mapper.Map<Dtos.AccountToListDTO>(account);
-            return Ok(accountDTO);
+
+            var fullAccount = await _accountRepository
+                .GetQueryable()
+                .Include(a => a.AccountType)
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            var accountDto = _mapper.Map<AccountToListDTO>(fullAccount);
+
+            return Ok(accountDto);
         }
 
         [HttpDelete("{id}")]

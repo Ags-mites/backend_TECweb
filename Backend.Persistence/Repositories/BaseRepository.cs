@@ -15,6 +15,10 @@ namespace Backend.Persistence.Repositories
             _context = context;
             _dbSet = _context.Set<T>();
         }
+        public IQueryable<T> GetQueryable()
+        {
+            return _dbSet.AsQueryable();
+        }
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             var items = await _dbSet.ToListAsync();

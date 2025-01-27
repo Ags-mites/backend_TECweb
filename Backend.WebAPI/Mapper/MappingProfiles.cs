@@ -34,6 +34,11 @@ namespace Backend.WebAPI.Mapper
             CreateMap<Account, AccountToListDTO>()
                 .ForMember(dest => dest.AccountTypeName, opt 
                 => opt.MapFrom(src => src.AccountType.Name));
+            
+            CreateMap<Account, AccountToListDTO>()
+            .ForMember(dto => dto.AccountTypeName, opt 
+            => opt.MapFrom(src => src.AccountType.Name));
+
             CreateMap<AccountTypeToCreateDTO, AccountType>();
             CreateMap<AccountTypeToEditDTO,AccountType>();
             CreateMap<AccountType, AccountTypeToListDTO>();
@@ -80,6 +85,9 @@ namespace Backend.WebAPI.Mapper
             CreateMap<FacturacionClienteToCreateDTO, FacturacionCliente>();
             CreateMap<FacturacionClienteToEditDTO,FacturacionCliente>();
             CreateMap<FacturacionCliente, FacturacionClienteToListDTO>();
+
+            CreateMap<Account, AccountToListDTO>()
+            .ForMember(dto => dto.AccountTypeName, opt => opt.MapFrom(src => src.AccountType.Name));
 
         }
     }
