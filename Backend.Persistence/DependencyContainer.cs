@@ -27,17 +27,12 @@ namespace Backend.Persistence
             services.AddScoped<IMovementRepository, MovementRepository>();
             services.AddScoped<IPayrollDetailRepository, PayrollDetailRepository>();
             services.AddScoped<IPayrollHeaderRepository, PayrollHeaderRepository>();
-            services.AddScoped<IReasonAdmissionRepository, ReasonAdmissionRepository>();
+            services.AddScoped<IReasonRepository, ReasonRepository>();
             services.AddScoped<IVoucherRespository, VoucherRespository>();
             services.AddScoped<IVoucherTypeRepository, VoucherTypeRepository>();
             services.AddScoped<IWorkersRepository, WorkersRepository>();
             services.AddScoped<IClientsFacRepository, ClientsFacRepository>();
             services.AddScoped<ICiudadEntrFacRepository, CiudadEntrFacRepository>();
-            services.AddScoped<IFormaDePagoCXCRepository, FormaDePagoCXCRepository>();
-            services.AddScoped<IJabdActividadRepository, JabdActividadRepository>();
-            services.AddScoped<ICabeceraCXCRepository, CabeceraCXCRepository>();
-            services.AddScoped<ICobradorCuentasCobrarRepository, CobradorCuentasCobrarRepository>();
-            services.AddScoped<ISilcActividadRepository, SilcActividadRepository>();
             services.AddScoped<IFacturacionClienteRepository, FacturacionClienteRepository>();
             services.AddScoped<IAuditAMRepository, AuditRepository>();
             services.AddScoped<IMR_ACTIVIDADRepository, MR_ACTIVIDADRepository>();

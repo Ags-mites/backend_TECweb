@@ -1,14 +1,11 @@
-namespace Backend.Entities
+namespace Backend.DTOs.Reason
 {
-    public class ReasonAdmission
+    public class ReasonToEditDTO
     {
         public int Id { get; set; }
         public required string Name { get; set; }
         public required string Code { get; set; }
-        public required string Status { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public required string Type { get; set; }
         public DateTime? UpdatedAt { get; set; }
-
-        
     }
 }

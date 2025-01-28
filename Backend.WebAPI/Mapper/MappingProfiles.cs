@@ -3,14 +3,9 @@ using Backend.DTOs;
 using Backend.DTOs.Account;
 using Backend.DTOs.Worker;
 using Backend.DTOs.ClientsFac;
-using Backend.DTOs.CobradorCuentasCobrar;
-using Backend.DTOs.FormaDePagoCXC;
-using Backend.DTOs.JabdActividad;
-using Backend.DTOs.CabeceraCXC;
 using Backend.DTOs.CiudadEntrFac;
-using Backend.DTOs.SilcActividad;
 using Backend.DTOs.FacturacionCliente;
-using Backend.DTOs.ReasonAdmission;
+using Backend.DTOs.Reason;
 using Backend.DTOs.AuditAM;
 using Backend.DTOs.MR_ACTIVIDAD;
 using Backend.DTOs.AccountType;
@@ -56,9 +51,9 @@ namespace Backend.WebAPI.Mapper
             CreateMap<WorkerToCreateDTO, Workers>();
             CreateMap<WorkerToEditDTO,Workers>();
             CreateMap<Workers, WorkerToListDTO>();
-            CreateMap<ReasonAdmissionToCreateDTO, ReasonAdmission>();
-            CreateMap<ReasonAdmissionToEditDTO, ReasonAdmission>();
-            CreateMap<ReasonAdmission, ReasonAdmissionToListDTO>();
+            CreateMap<ReasonToCreateDTO, Reasons>();
+            CreateMap<ReasonToEditDTO, Reasons>();
+            CreateMap<Reasons, ReasonToListDTO>();
             CreateMap<PayrollDetailToCreateDTO, PayrollDetail>();
             CreateMap<PayrollDetailToEditDTO, PayrollDetail>();
             CreateMap<PayrollDetail, PayrollDetailToListDTO>();
@@ -78,9 +73,6 @@ namespace Backend.WebAPI.Mapper
             //simple page 2
             CreateMap<CiudadEntrFacToCreateDTO, CiudadEntrFac>();
             CreateMap<CiudadEntrFac, CiudadEntrFacToListDTO>();
-            //practice
-            CreateMap<SilcActividadToCreateDTO, SilcActividad>();
-            CreateMap<SilcActividad, SilcActividadToListDTO>();
             //page complicada
             CreateMap<FacturacionClienteToCreateDTO, FacturacionCliente>();
             CreateMap<FacturacionClienteToEditDTO,FacturacionCliente>();
