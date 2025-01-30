@@ -9,13 +9,5 @@ namespace Backend.Entities
         public required decimal Credit { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-
-                
-        public int AccountId { get; set; }
-        public int AccountTypeId { get; set; }
-        public int VoucherId { get; set; }
-        public Account Accounts { get; set; }
-        public AccountType AccountType { get; set; }
-        public required Voucher Voucher { get; set; }
     }
 }

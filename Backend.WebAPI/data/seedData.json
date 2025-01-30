@@ -5,35 +5,35 @@
       "Name": "Caja General",
       "Status": "Active",
       "Description": "Cuenta principal para efectivo",
-      "AccountTypeId": 18
+      "AccountTypeId": 1
     },
     {
       "Code": "ACC002",
       "Name": "Bancos",
       "Status": "Active",
       "Description": "Cuenta para depósitos bancarios",
-      "AccountTypeId": 19
+      "AccountTypeId": 1
     },
     {
       "Code": "ACC003",
       "Name": "Cuenta Terciaria",
       "Status": "Inactive",
       "Description": "Cuenta terciaria de prueba",
-      "AccountTypeId": 20
+      "AccountTypeId": 1
     },
     {
       "Code": "ACC004",
       "Name": "Cuentas por Cobrar",
       "Status": "Active",
       "Description": "Cuenta para gestionar deudas de clientes",
-      "AccountTypeId": 18
+      "AccountTypeId": 1
     },
     {
       "Code": "ACC005",
       "Name": "Cuentas por Pagar",
       "Status": "Active",
       "Description": "Cuenta para registrar obligaciones con proveedores",
-      "AccountTypeId": 19
+      "AccountTypeId": 1
     }
   ],
   "AccountsType": [
