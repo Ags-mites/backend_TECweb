@@ -1,0 +1,77 @@
+{
+  "Accounts": [
+    {
+      "Code": "ACC001",
+      "Name": "Caja General",
+      "Status": "Active",
+      "Description": "Cuenta principal para efectivo",
+      "AccountTypeId": 1
+    },
+    {
+      "Code": "ACC002",
+      "Name": "Bancos",
+      "Status": "Active",
+      "Description": "Cuenta para depósitos bancarios",
+      "AccountTypeId": 1
+    },
+    {
+      "Code": "ACC003",
+      "Name": "Cuenta Terciaria",
+      "Status": "Inactive",
+      "Description": "Cuenta terciaria de prueba",
+      "AccountTypeId": 1
+    },
+    {
+      "Code": "ACC004",
+      "Name": "Cuentas por Cobrar",
+      "Status": "Active",
+      "Description": "Cuenta para gestionar deudas de clientes",
+      "AccountTypeId": 1
+    },
+    {
+      "Code": "ACC005",
+      "Name": "Cuentas por Pagar",
+      "Status": "Active",
+      "Description": "Cuenta para registrar obligaciones con proveedores",
+      "AccountTypeId": 1
+    }
+  ],
+  "AccountsType": [
+    {
+      "Code": "TACC001",
+      "Name": "Activo",
+      "Status": "Active",
+      "Description": "Representa los recursos que posee la empresa."
+    },
+    {
+      "Code": "TACC002",
+      "Name": "Pasivo",
+      "Status": "Active",
+      "Description": "Obligaciones y deudas de la empresa."
+    },
+    {
+      "Code": "TACC003",
+      "Name": "Patrimonio",
+      "Status": "Active",
+      "Description": "Capital contable y reservas de la empresa."
+    },
+    {
+      "Code": "TACC004",
+      "Name": "Ingresos",
+      "Status": "Active",
+      "Description": "Cuentas relacionadas con los ingresos obtenidos por la empresa."
+    },
+    {
+      "Code": "TACC005",
+      "Name": "Egresos",
+      "Status": "Active",
+      "Description": "Cuentas relacionadas con los gastos y costos de la empresa."
+    },
+    {
+      "Code": "TACC006",
+      "Name": "Cuentas de Orden",
+      "Status": "Inactive",
+      "Description": "Cuentas auxiliares para registrar operaciones de control interno."
+    }
+  ]
+}
