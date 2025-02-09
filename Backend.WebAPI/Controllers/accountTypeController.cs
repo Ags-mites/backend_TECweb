@@ -9,7 +9,7 @@ using Dtos = Backend.DTOs.AccountType;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/accountTypes")]
     [ApiController]
     public class accountTypeController : ControllerBase
     {

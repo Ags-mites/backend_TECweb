@@ -9,7 +9,7 @@ using Dtos = Backend.DTOs.Voucher;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/vouchers")]
     [ApiController]
     public class voucherController : ControllerBase
     {

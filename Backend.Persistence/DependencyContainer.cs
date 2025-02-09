@@ -35,8 +35,6 @@ namespace Backend.Persistence
             services.AddScoped<IClientsRepository, ClientsRepository>();
             services.AddScoped<IInvoiceDetailRepository, InvoiceDetailRepository>();
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-            services.AddScoped<IAuditAMRepository, AuditRepository>();
-            services.AddScoped<IMR_ACTIVIDADRepository, MR_ACTIVIDADRepository>();
             return services;
         }
     }

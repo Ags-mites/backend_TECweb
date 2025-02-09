@@ -5,8 +5,6 @@ using Backend.DTOs.Worker;
 using Backend.DTOs.Cities;
 using Backend.DTOs.Client;
 using Backend.DTOs.Reason;
-using Backend.DTOs.AuditAM;
-using Backend.DTOs.MR_ACTIVIDAD;
 using Backend.DTOs.AccountType;
 using Backend.DTOs.PayrollDetail;
 using Backend.DTOs.PayrollHeader;
@@ -61,10 +59,6 @@ namespace Backend.WebAPI.Mapper
             CreateMap<PayrollHeaderToCreateDTO, PayrollHeader>();
             CreateMap<PayrollHeaderToEditDTO, PayrollHeader>();
             CreateMap<PayrollHeader, PayrollHeaderToListDTO>();
-            CreateMap<AuditAMToCreateDTO, AuditAM>();
-            CreateMap<AuditAM, AuditAMToCreateDTO>();
-            CreateMap<MR_ACTIVIDADToCreateDTO, MR_ACTIVIDAD>();
-            CreateMap<MR_ACTIVIDAD, MR_ACTIVIDADToCreateDTO>();
 
             //facturation
             CreateMap<CitiesToCreateDTO, Cities>();

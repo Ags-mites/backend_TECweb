@@ -10,7 +10,7 @@ using Dtos = Backend.DTOs.Account;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/accounts")]
     [ApiController]
     public class accountController : ControllerBase
     {

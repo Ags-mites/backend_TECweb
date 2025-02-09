@@ -18,8 +18,6 @@ namespace Backend.Persistence
         public DbSet<Voucher> Voucher { get; set; }
         public DbSet<VoucherType> VoucherType { get; set; }
         public DbSet<Workers> Workers { get; set; }
-        public DbSet<AuditAM> AuditAM { get; set; }
-        public DbSet<MR_ACTIVIDAD> MR_ACTIVIDAD { get; set; }
         public DbSet<Cities> Cities { get; set; }
         public DbSet<Clients> Clients { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
