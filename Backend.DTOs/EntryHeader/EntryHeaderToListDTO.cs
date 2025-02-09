@@ -1,6 +1,6 @@
 namespace Backend.DTOs.Voucher
 {
-    public class VoucherToListDTO
+    public class EntryHeaderToListDTO
     {
         public int Id { get; set; }
         public int Numeration { get; set; }

@@ -1,8 +1,7 @@
 namespace Backend.DTOs.Voucher
 {
-    public class VoucherToEditDTO
+    public class EntryHeaderToCreateDTO
     {
-        public int Id { get; set; }
         public int Numeration { get; set; }
         public required string CodeVoucher { get; set; }
         public string? DescriptionVoucher { get; set; }

@@ -3,9 +3,9 @@ using Backend.Persistence.Interfaces;
 
 namespace Backend.Persistence.Repositories
 {
-    public class VoucherTypeRepository: BaseRepository<VoucherType>, IVoucherTypeRepository
+    public class EntryRepository: BaseRepository<EntryHeader>, IEntryRepository
     {
-        public VoucherTypeRepository(DataContext context)
+        public EntryRepository(DataContext context)
         :base(context){
             
         }

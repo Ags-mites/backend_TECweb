@@ -15,8 +15,8 @@ namespace Backend.Persistence
         public DbSet<PayrollDetail> PayrollDetail { get; set; }
         public DbSet<PayrollHeader> PayrollHeader { get; set; }
         public DbSet<Reasons> Reason { get; set; }
-        public DbSet<Voucher> Voucher { get; set; }
-        public DbSet<VoucherType> VoucherType { get; set; }
+        public DbSet<EntryHeader> EntryHeaders { get; set; }
+        public DbSet<EntryDetail> EntryDetail { get; set; }
         public DbSet<Workers> Workers { get; set; }
         public DbSet<AuditAM> AuditAM { get; set; }
         public DbSet<MR_ACTIVIDAD> MR_ACTIVIDAD { get; set; }
