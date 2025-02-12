@@ -1,6 +1,6 @@
 using Backend.DTOs.EntryDetail;
 
-namespace Backend.DTOs.Voucher
+namespace Backend.DTOs.EntryHeader
 {
     public class EntryHeaderToListDTO
     {
@@ -9,9 +9,6 @@ namespace Backend.DTOs.Voucher
         public required string Numeration { get; set; }
         public string Notes { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
-
         public List<EntryDetailToListDTO> EntryDetails { get; set; } = new();
-
     }
 }
-

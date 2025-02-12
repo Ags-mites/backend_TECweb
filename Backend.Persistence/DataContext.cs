@@ -25,7 +25,29 @@ namespace Backend.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            //configuracion temporal
+            //todo cambiar ajuste
+            modelBuilder.Entity<InvoiceDetail>()
+                .Property(i => i.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Movement>()
+                .Property(m => m.Credit)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Movement>()
+                .Property(m => m.Debit)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<PayrollDetail>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Workers>()
+                .Property(w => w.Salary)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

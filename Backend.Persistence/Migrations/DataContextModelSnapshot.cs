@@ -35,7 +35,8 @@ namespace Backend.Persistence.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -45,11 +46,13 @@ namespace Backend.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -58,7 +61,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasIndex("AccountTypeId");
 
-                    b.ToTable("Account");
+                    b.ToTable("account", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Entities.AccountType", b =>
@@ -92,10 +95,10 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountType");
+                    b.ToTable("AccountTypes");
                 });
 
-            modelBuilder.Entity("Backend.Entities.AuditAM", b =>
+            modelBuilder.Entity("Backend.Entities.Cities", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,20 +106,20 @@ namespace Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("NameAM")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserAM")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditAM");
+                    b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("Backend.Entities.CiudadEntrFac", b =>
+            modelBuilder.Entity("Backend.Entities.Clients", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,18 +127,24 @@ namespace Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CiudadEntrega")
+                    b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DolaresVendidos")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RUC")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CiudadEntrFac");
+                    b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Backend.Entities.ClientsFac", b =>
+            modelBuilder.Entity("Backend.Entities.EntryDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,35 +152,39 @@ namespace Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Apellido")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CiudadEntrFacId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Ruc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("TimeCli")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<decimal?>("CreditAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("DebitAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("EntryHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CiudadEntrFacId");
+                    b.HasIndex("AccountId");
 
-                    b.ToTable("ClientsFac");
+                    b.HasIndex("EntryHeaderId");
+
+                    b.ToTable("EntryDetails");
                 });
 
-            modelBuilder.Entity("Backend.Entities.FacturacionCliente", b =>
+            modelBuilder.Entity("Backend.Entities.EntryHeader", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,24 +192,30 @@ namespace Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CantidadProd")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("DescripcionProd")
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PrecioTotal")
-                        .HasColumnType("int");
+                    b.Property<string>("Numeration")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("PrecioUnitario")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("FacturacionCliente");
+                    b.ToTable("EntryHeaders");
                 });
 
-            modelBuilder.Entity("Backend.Entities.MR_ACTIVIDAD", b =>
+            modelBuilder.Entity("Backend.Entities.Invoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,17 +223,54 @@ namespace Backend.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("NOMBRE_ACTIVI_MR")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("USUARIO_MR")
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InvoiceNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MR_ACTIVIDAD");
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("Backend.Entities.InvoiceDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Article")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("InvoiceDetails");
                 });
 
             modelBuilder.Entity("Backend.Entities.Movement", b =>
@@ -245,7 +301,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movement");
+                    b.ToTable("Movements");
                 });
 
             modelBuilder.Entity("Backend.Entities.PayrollDetail", b =>
@@ -273,7 +329,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PayrollDetail");
+                    b.ToTable("PayrollDetails");
                 });
 
             modelBuilder.Entity("Backend.Entities.PayrollHeader", b =>
@@ -305,7 +361,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PayrollHeader");
+                    b.ToTable("PayrollHeaders");
                 });
 
             modelBuilder.Entity("Backend.Entities.Reasons", b =>
@@ -336,69 +392,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reason");
-                });
-
-            modelBuilder.Entity("Backend.Entities.Voucher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CodeVoucher")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DescriptionVoucher")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Numeration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("VoucherTypeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VoucherTypeId");
-
-                    b.ToTable("Voucher");
-                });
-
-            modelBuilder.Entity("Backend.Entities.VoucherType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VoucherType");
+                    b.ToTable("Reasons");
                 });
 
             modelBuilder.Entity("Backend.Entities.Workers", b =>
@@ -445,24 +439,53 @@ namespace Backend.Persistence.Migrations
                     b.Navigation("AccountType");
                 });
 
-            modelBuilder.Entity("Backend.Entities.ClientsFac", b =>
+            modelBuilder.Entity("Backend.Entities.EntryDetail", b =>
                 {
-                    b.HasOne("Backend.Entities.CiudadEntrFac", "CiudadEntrFac")
+                    b.HasOne("Backend.Entities.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("CiudadEntrFacId");
-
-                    b.Navigation("CiudadEntrFac");
-                });
-
-            modelBuilder.Entity("Backend.Entities.Voucher", b =>
-                {
-                    b.HasOne("Backend.Entities.VoucherType", "VoucherTypes")
-                        .WithMany("Vouchers")
-                        .HasForeignKey("VoucherTypeId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("VoucherTypes");
+                    b.HasOne("Backend.Entities.EntryHeader", "EntryHeader")
+                        .WithMany("EntryDetails")
+                        .HasForeignKey("EntryHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("EntryHeader");
+                });
+
+            modelBuilder.Entity("Backend.Entities.Invoice", b =>
+                {
+                    b.HasOne("Backend.Entities.Cities", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Entities.Clients", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("Backend.Entities.InvoiceDetail", b =>
+                {
+                    b.HasOne("Backend.Entities.Invoice", "Invoice")
+                        .WithMany("Details")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
                 });
 
             modelBuilder.Entity("Backend.Entities.AccountType", b =>
@@ -470,9 +493,14 @@ namespace Backend.Persistence.Migrations
                     b.Navigation("Accounts");
                 });
 
-            modelBuilder.Entity("Backend.Entities.VoucherType", b =>
+            modelBuilder.Entity("Backend.Entities.EntryHeader", b =>
                 {
-                    b.Navigation("Vouchers");
+                    b.Navigation("EntryDetails");
+                });
+
+            modelBuilder.Entity("Backend.Entities.Invoice", b =>
+                {
+                    b.Navigation("Details");
                 });
 #pragma warning restore 612, 618
         }

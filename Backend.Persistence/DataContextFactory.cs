@@ -9,13 +9,14 @@ namespace Backend.Persistence
     {
         public DataContext CreateDbContext(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            var basePath = Directory.GetCurrentDirectory();
+             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var connectionString = configuration.GetConnectionString("ConnectionSQLServer");
 
             optionsBuilder.UseSqlServer(connectionString);
 

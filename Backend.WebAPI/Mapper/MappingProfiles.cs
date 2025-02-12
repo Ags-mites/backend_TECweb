@@ -9,11 +9,11 @@ using Backend.DTOs.AccountType;
 using Backend.DTOs.PayrollDetail;
 using Backend.DTOs.PayrollHeader;
 using Backend.DTOs.Movements;
-using Backend.DTOs.Voucher;
-using Backend.DTOs.VoucherType;
 using Backend.Entities;
 using Backend.DTOs.Invoice;
 using Backend.DTOs.InvoiceDetail;
+using Backend.DTOs.EntryHeader;
+using Backend.DTOs.EntryDetail;
 
 
 namespace Backend.WebAPI.Mapper

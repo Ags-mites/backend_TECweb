@@ -10,6 +10,5 @@ namespace Backend.DTOs.EntryDetail
         public decimal? DebitAmount { get; set; }
         public decimal? CreditAmount { get; set; }
         public DateTime CreatedAt { get; set; }
-
     }
 }
