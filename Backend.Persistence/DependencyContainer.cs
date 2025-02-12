@@ -27,9 +27,9 @@ namespace Backend.Persistence
             services.AddScoped<IMovementRepository, MovementRepository>();
             services.AddScoped<IPayrollDetailRepository, PayrollDetailRepository>();
             services.AddScoped<IPayrollHeaderRepository, PayrollHeaderRepository>();
+            services.AddScoped<IEntryHeaderRepository, EntryHeaderRepository >();
+            services.AddScoped<IEntryDetailRepository, EntryDetailRepository>();
             services.AddScoped<IReasonRepository, ReasonRepository>();
-            services.AddScoped<IVoucherRespository, VoucherRespository>();
-            services.AddScoped<IVoucherTypeRepository, VoucherTypeRepository>();
             services.AddScoped<IWorkersRepository, WorkersRepository>();
             services.AddScoped<ICitiesRepository, CitiesRepository>();
             services.AddScoped<IClientsRepository, ClientsRepository>();

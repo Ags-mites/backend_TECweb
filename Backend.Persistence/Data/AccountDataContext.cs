@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Backend.Entities;
 
 namespace Backend.Persistence.Data
 {
-    public partial class DataContext : DbContext
+    public partial class AccountDataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+        public AccountDataContext(DbContextOptions<AccountDataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

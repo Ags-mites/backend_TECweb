@@ -39,12 +39,18 @@ namespace Backend.WebAPI.Mapper
             CreateMap<MovementToCreateDTO, Movement>();
             CreateMap<MovementToEditDTO,Movement>();
             CreateMap<Movement, MovementToListDTO>();
-            CreateMap<VoucherToCreateDTO, Voucher>();
-            CreateMap<VoucherToEditDTO,Voucher>();
-            CreateMap<Voucher, VoucherToListDTO>();
-            CreateMap<VoucherTypeToCreateDTO, VoucherType>();
-            CreateMap<VoucherTypeToEditDTO,VoucherType>();
-            CreateMap<VoucherType, VoucherTypeToListDTO>();
+
+            CreateMap<EntryHeaderToCreateDTO, EntryHeader>();
+            CreateMap<EntryHeaderToEditDTO, EntryHeader>();
+            CreateMap<EntryHeader, EntryHeaderToListDTO>()
+                .ForMember(dest => dest.EntryDetails, 
+                opt => opt.MapFrom(src => src.EntryDetails));
+
+            CreateMap<EntryDetailToCreateDTO, EntryDetail>();
+            CreateMap<EntryDetailToEditDTO, EntryDetail>();
+            CreateMap<EntryDetail, EntryDetailToListDTO>()
+                .ForMember(dest => dest.AccountName, 
+                opt => opt.MapFrom(src => src.Account.Name));
 
             //Nomina
             CreateMap<WorkerToCreateDTO, Workers>();

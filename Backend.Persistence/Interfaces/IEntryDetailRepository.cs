@@ -2,7 +2,7 @@ using Backend.Entities;
 
 namespace Backend.Persistence.Interfaces
 {
-    public interface IEntryRepository: IBaseRepository<EntryHeader>
+    public interface IEntryDetailRepository: IBaseRepository<EntryDetail>
     {
         
     }

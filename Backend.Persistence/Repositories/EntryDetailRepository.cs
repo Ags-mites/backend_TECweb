@@ -3,9 +3,9 @@ using Backend.Persistence.Interfaces;
 
 namespace Backend.Persistence.Repositories
 {
-    public class EntryRepository: BaseRepository<EntryHeader>, IEntryRepository
+    public class EntryDetailRepository: BaseRepository<EntryDetail>, IEntryDetailRepository
     {
-        public EntryRepository(DataContext context)
+        public EntryDetailRepository(DataContext context)
         :base(context){
             
         }

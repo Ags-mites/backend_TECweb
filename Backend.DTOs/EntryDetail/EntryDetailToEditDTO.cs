@@ -3,11 +3,9 @@ namespace Backend.DTOs.VoucherType
     public class EntryDetailToEditDTO
     {
         public int Id { get; set; }
-        public DateTime EntryDate { get; set; }
-        public string VoucherType { get; set; } = string.Empty;
-        public string Numeration { get; set; } = string.Empty;
-        public string Notes { get; set; } = string.Empty;
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public int AccountId { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public decimal? DebitAmount { get; set; }
+        public decimal? CreditAmount { get; set; }
     }
 }
