@@ -85,7 +85,8 @@ namespace Backend.WebAPI.Mapper
 
 
             CreateMap<Account, AccountToListDTO>()
-            .ForMember(dto => dto.AccountTypeName, opt => opt.MapFrom(src => src.AccountType.Name));
+                .ForMember(dto => dto.AccountTypeName, opt => 
+                opt.MapFrom(src => src.AccountType.Name));
 
         }
     }

@@ -6,5 +6,6 @@ namespace Backend.DTOs.EntryDetail
         public string Description { get; set; } = string.Empty;
         public decimal? DebitAmount { get; set; }
         public decimal? CreditAmount { get; set; }
+        
     }
 }
