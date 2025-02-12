@@ -1,4 +1,4 @@
-namespace Backend.DTOs.Voucher
+namespace Backend.DTOs.EntryHeader
 {
     public class EntryHeaderToEditDTO
     {

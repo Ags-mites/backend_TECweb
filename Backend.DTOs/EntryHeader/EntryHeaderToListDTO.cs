@@ -1,4 +1,4 @@
-using Backend.DTOs.VoucherType;
+using Backend.DTOs.EntryDetail;
 
 namespace Backend.DTOs.Voucher
 {

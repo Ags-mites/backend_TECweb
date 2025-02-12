@@ -1,4 +1,4 @@
-namespace Backend.DTOs.VoucherType
+namespace Backend.DTOs.EntryDetail
 {
     public class EntryDetailToEditDTO
     {
