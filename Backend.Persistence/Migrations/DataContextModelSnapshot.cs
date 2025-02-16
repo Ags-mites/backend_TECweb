@@ -277,37 +277,6 @@ namespace Backend.Persistence.Migrations
                     b.ToTable("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("Backend.Entities.Movement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Contact")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Credit")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Debit")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("DescriptionVoucher")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Movements");
-                });
-
             modelBuilder.Entity("Backend.Entities.PayrollDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -319,7 +288,7 @@ namespace Backend.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PayrollId")
+                    b.Property<int>("PayrollHeaderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -332,6 +301,10 @@ namespace Backend.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PayrollHeaderId");
+
+                    b.HasIndex("ReasonId");
 
                     b.ToTable("PayrollDetails");
                 });
@@ -348,14 +321,15 @@ namespace Backend.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DatePayroll")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATE");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -365,10 +339,12 @@ namespace Backend.Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Workerid");
+
                     b.ToTable("PayrollHeaders");
                 });
 
-            modelBuilder.Entity("Backend.Entities.Reasons", b =>
+            modelBuilder.Entity("Backend.Entities.Reason", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -399,7 +375,7 @@ namespace Backend.Persistence.Migrations
                     b.ToTable("Reasons");
                 });
 
-            modelBuilder.Entity("Backend.Entities.Workers", b =>
+            modelBuilder.Entity("Backend.Entities.Worker", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -492,6 +468,36 @@ namespace Backend.Persistence.Migrations
                     b.Navigation("Invoice");
                 });
 
+            modelBuilder.Entity("Backend.Entities.PayrollDetail", b =>
+                {
+                    b.HasOne("Backend.Entities.PayrollHeader", "PayrollHeader")
+                        .WithMany("PayrollDetails")
+                        .HasForeignKey("PayrollHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Entities.Reason", "Reason")
+                        .WithMany()
+                        .HasForeignKey("ReasonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PayrollHeader");
+
+                    b.Navigation("Reason");
+                });
+
+            modelBuilder.Entity("Backend.Entities.PayrollHeader", b =>
+                {
+                    b.HasOne("Backend.Entities.Worker", "Worker")
+                        .WithMany()
+                        .HasForeignKey("Workerid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Worker");
+                });
+
             modelBuilder.Entity("Backend.Entities.AccountType", b =>
                 {
                     b.Navigation("Accounts");
@@ -505,6 +511,11 @@ namespace Backend.Persistence.Migrations
             modelBuilder.Entity("Backend.Entities.Invoice", b =>
                 {
                     b.Navigation("Details");
+                });
+
+            modelBuilder.Entity("Backend.Entities.PayrollHeader", b =>
+                {
+                    b.Navigation("PayrollDetails");
                 });
 #pragma warning restore 612, 618
         }

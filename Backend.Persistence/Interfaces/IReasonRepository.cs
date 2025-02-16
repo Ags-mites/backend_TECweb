@@ -3,7 +3,7 @@ using Backend.Entities;
 
 namespace Backend.Persistence.Interfaces
 {
-    public interface IReasonRepository: IBaseRepository<Reasons>
+    public interface IReasonRepository: IBaseRepository<Reason>
     {
         
     }

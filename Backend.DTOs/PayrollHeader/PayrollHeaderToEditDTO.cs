@@ -1,3 +1,4 @@
+using Dtos = Backend.DTOs.PayrollDetail;
 namespace Backend.DTOs.PayrollHeader
 {
     public class PayrollHeaderToEditDTO
@@ -8,5 +9,7 @@ namespace Backend.DTOs.PayrollHeader
         public string? Description { get; set; }
         public DateTime? DatePayroll { get; set; }
         public DateTime UpdatedAt { get; set; }
+        
+        public List<Dtos.PayrollDetailToEditDTO>? PayrollDetails { get; set; }
     }
 }

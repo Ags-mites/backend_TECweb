@@ -1,3 +1,5 @@
+using Backend.DTOs.PayrollDetail;
+
 namespace Backend.DTOs.PayrollHeader
 {
     public class PayrollHeaderToListDTO
@@ -9,5 +11,6 @@ namespace Backend.DTOs.PayrollHeader
         public DateTime DatePayroll { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public List<PayrollDetailToListDTO> PayrollDetails { get; set; } = new();
     }
 }

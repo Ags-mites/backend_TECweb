@@ -41,7 +41,7 @@ namespace Backend.WebAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> Post(Dtos.WorkerToCreateDTO workerToCreateDTO)
         {
-            var workerToCreate = _mapper.Map<Workers>(workerToCreateDTO);
+            var workerToCreate = _mapper.Map<Worker>(workerToCreateDTO);
             workerToCreate.CreatedAt = DateTime.Now;
             var workerCreated = await _workersRepository.AddAsync(workerToCreate);
             var workerCreateDTO = _mapper.Map<Dtos.WorkerToListDTO>(workerCreated);

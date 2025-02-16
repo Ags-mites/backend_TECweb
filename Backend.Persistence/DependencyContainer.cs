@@ -24,7 +24,6 @@ namespace Backend.Persistence
         ){
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountTypeRepository, AccountTypeRepository>();
-            services.AddScoped<IMovementRepository, MovementRepository>();
             services.AddScoped<IPayrollDetailRepository, PayrollDetailRepository>();
             services.AddScoped<IPayrollHeaderRepository, PayrollHeaderRepository>();
             services.AddScoped<IEntryHeaderRepository, EntryHeaderRepository >();

@@ -1,3 +1,5 @@
+using Dtos = Backend.DTOs.PayrollDetail;
+
 namespace Backend.DTOs.PayrollHeader
 {
     public class PayrollHeaderToCreateDTO
@@ -7,5 +9,7 @@ namespace Backend.DTOs.PayrollHeader
         public string? Description { get; set; }
         public DateTime DatePayroll { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public List<Dtos.PayrollDetailToCreateDTO>? PayrollDetails { get; set; }
     }
 }

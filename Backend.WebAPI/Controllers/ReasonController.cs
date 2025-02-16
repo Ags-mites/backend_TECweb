@@ -41,7 +41,7 @@ namespace Backend.WebAPI.Controllers
         [HttpPost]
         public async Task <IActionResult> Post(Dtos.ReasonToCreateDTO reasonToCreateDTO)
         {
-            var reasonToCreate = _mapper.Map<Reasons>(reasonToCreateDTO);
+            var reasonToCreate = _mapper.Map<Reason>(reasonToCreateDTO);
             Console.WriteLine(reasonToCreate);            
             reasonToCreate.CreatedAt = DateTime.Now;
             Console.WriteLine(reasonToCreate.CreatedAt);            

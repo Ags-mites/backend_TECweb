@@ -8,7 +8,6 @@ using Backend.DTOs.Reason;
 using Backend.DTOs.AccountType;
 using Backend.DTOs.PayrollDetail;
 using Backend.DTOs.PayrollHeader;
-using Backend.DTOs.Movements;
 using Backend.Entities;
 using Backend.DTOs.Invoice;
 using Backend.DTOs.InvoiceDetail;
@@ -36,9 +35,7 @@ namespace Backend.WebAPI.Mapper
             CreateMap<AccountTypeToCreateDTO, AccountType>();
             CreateMap<AccountTypeToEditDTO,AccountType>();
             CreateMap<AccountType, AccountTypeToListDTO>();
-            CreateMap<MovementToCreateDTO, Movement>();
-            CreateMap<MovementToEditDTO,Movement>();
-            CreateMap<Movement, MovementToListDTO>();
+
 
             CreateMap<EntryHeaderToCreateDTO, EntryHeader>();
             CreateMap<EntryHeaderToEditDTO, EntryHeader>();
@@ -53,18 +50,23 @@ namespace Backend.WebAPI.Mapper
                 opt => opt.MapFrom(src => src.Account.Name));
 
             //Nomina
-            CreateMap<WorkerToCreateDTO, Workers>();
-            CreateMap<WorkerToEditDTO,Workers>();
-            CreateMap<Workers, WorkerToListDTO>();
-            CreateMap<ReasonToCreateDTO, Reasons>();
-            CreateMap<ReasonToEditDTO, Reasons>();
-            CreateMap<Reasons, ReasonToListDTO>();
+            CreateMap<WorkerToCreateDTO, Worker>();
+            CreateMap<WorkerToEditDTO,Worker>();
+            CreateMap<Worker, WorkerToListDTO>();
+            CreateMap<ReasonToCreateDTO, Reason>();
+            CreateMap<ReasonToEditDTO, Reason>();
+            CreateMap<Reason, ReasonToListDTO>();
             CreateMap<PayrollDetailToCreateDTO, PayrollDetail>();
             CreateMap<PayrollDetailToEditDTO, PayrollDetail>();
-            CreateMap<PayrollDetail, PayrollDetailToListDTO>();
+            CreateMap<PayrollDetail, PayrollDetailToListDTO>()
+                 .ForMember(dest => dest.PayrollId, 
+                opt => opt.MapFrom(src => src.PayrollHeaderId));
+
             CreateMap<PayrollHeaderToCreateDTO, PayrollHeader>();
             CreateMap<PayrollHeaderToEditDTO, PayrollHeader>();
-            CreateMap<PayrollHeader, PayrollHeaderToListDTO>();
+            CreateMap<PayrollHeader, PayrollHeaderToListDTO>()
+               .ForMember(dest => dest.PayrollDetails, 
+                opt => opt.MapFrom(src => src.PayrollDetails));
 
             //facturation
             CreateMap<CitiesToCreateDTO, Cities>();
