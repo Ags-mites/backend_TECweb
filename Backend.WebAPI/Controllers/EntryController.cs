@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/vouchers")]
+    [Route("api/v1/vouchers")]
     [ApiController]
     public class EntryController : ControllerBase
     {
@@ -63,6 +63,7 @@ namespace Backend.WebAPI.Controllers
             var entryHeader = _mapper.Map<EntryHeader>(entryHeaderDto);
             entryHeader.EntryDetails = [];
             entryHeader.CreatedAt = DateTime.UtcNow;
+            entryHeader.UpdatedAt = DateTime.UtcNow;
 
             var createdHeader = await _entryHeaderRepository.AddAsync(entryHeader);
 
@@ -75,6 +76,7 @@ namespace Backend.WebAPI.Controllers
                 {
                     detail.EntryHeaderId = createdHeader.Id;
                     detail.CreatedAt = DateTime.UtcNow;
+                    detail.UpdatedAt = DateTime.UtcNow;
                 }
                 await _entryDetailRepository.AddAll(entryDetails);
             }

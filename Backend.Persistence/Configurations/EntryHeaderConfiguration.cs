@@ -14,6 +14,13 @@ namespace Backend.Persistence.Configurations
                    .IsRequired()
                    .HasMaxLength(50);
 
+            builder.Property(e => e.EntryDate)
+                   .HasConversion(
+                       v => v.Date,
+                       v => v 
+                   )
+                   .HasColumnType("DATE");
+
             builder.HasMany(e => e.EntryDetails)
                    .WithOne(ed => ed.EntryHeader)
                    .HasForeignKey(ed => ed.EntryHeaderId)

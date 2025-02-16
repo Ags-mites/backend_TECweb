@@ -61,7 +61,7 @@ namespace Backend.Persistence.Migrations
 
                     b.HasIndex("AccountTypeId");
 
-                    b.ToTable("account", (string)null);
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("Backend.Entities.AccountType", b =>
@@ -196,7 +196,11 @@ namespace Backend.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EntryDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATE");
+
+                    b.Property<string>("EntryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
                         .IsRequired()

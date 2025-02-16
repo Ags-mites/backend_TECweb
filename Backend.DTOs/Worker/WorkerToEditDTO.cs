@@ -7,6 +7,6 @@ namespace Backend.DTOs.Worker
         public required string Name { get; set; }
         public DateTime DateAdmission { get; set; }
         public decimal Salary { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

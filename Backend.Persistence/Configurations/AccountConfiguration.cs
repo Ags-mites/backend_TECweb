@@ -8,7 +8,7 @@ namespace Backend.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Account> builder)
         {
-            builder.ToTable("account");
+            /* builder.ToTable("account"); */
 
             builder.HasKey(a => a.Id);
 
