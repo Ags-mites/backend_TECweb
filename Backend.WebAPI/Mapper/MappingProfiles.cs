@@ -17,23 +17,23 @@ using Backend.DTOs.EntryDetail;
 
 namespace Backend.WebAPI.Mapper
 {
-    public class MappingProfiles: Profile
+    public class MappingProfiles : Profile
     {
-        public  MappingProfiles()
+        public MappingProfiles()
         {
             //Contabilidad
             CreateMap<AccountToCreateDTO, Account>();
-            CreateMap<AccountToEditDTO,Account>();
+            CreateMap<AccountToEditDTO, Account>();
             CreateMap<Account, AccountToListDTO>()
-                .ForMember(dest => dest.AccountTypeName, opt 
+                .ForMember(dest => dest.AccountTypeName, opt
                 => opt.MapFrom(src => src.AccountType.Name));
-            
+
             CreateMap<Account, AccountToListDTO>()
-            .ForMember(dto => dto.AccountTypeName, opt 
+            .ForMember(dto => dto.AccountTypeName, opt
             => opt.MapFrom(src => src.AccountType.Name));
 
             CreateMap<AccountTypeToCreateDTO, AccountType>();
-            CreateMap<AccountTypeToEditDTO,AccountType>();
+            CreateMap<AccountTypeToEditDTO, AccountType>();
             CreateMap<AccountType, AccountTypeToListDTO>();
 
 
@@ -46,12 +46,12 @@ namespace Backend.WebAPI.Mapper
             CreateMap<EntryDetailToCreateDTO, EntryDetail>();
             CreateMap<EntryDetailToEditDTO, EntryDetail>();
             CreateMap<EntryDetail, EntryDetailToListDTO>()
-                .ForMember(dest => dest.AccountName, 
+                .ForMember(dest => dest.AccountName,
                 opt => opt.MapFrom(src => src.Account.Name));
 
             //Nomina
             CreateMap<WorkerToCreateDTO, Worker>();
-            CreateMap<WorkerToEditDTO,Worker>();
+            CreateMap<WorkerToEditDTO, Worker>();
             CreateMap<Worker, WorkerToListDTO>();
             CreateMap<ReasonToCreateDTO, Reason>();
             CreateMap<ReasonToEditDTO, Reason>();
@@ -59,14 +59,18 @@ namespace Backend.WebAPI.Mapper
             CreateMap<PayrollDetailToCreateDTO, PayrollDetail>();
             CreateMap<PayrollDetailToEditDTO, PayrollDetail>();
             CreateMap<PayrollDetail, PayrollDetailToListDTO>()
-                 .ForMember(dest => dest.PayrollId, 
+                 .ForMember(dest => dest.PayrollId,
                 opt => opt.MapFrom(src => src.PayrollHeaderId));
 
             CreateMap<PayrollHeaderToCreateDTO, PayrollHeader>();
             CreateMap<PayrollHeaderToEditDTO, PayrollHeader>();
             CreateMap<PayrollHeader, PayrollHeaderToListDTO>()
-               .ForMember(dest => dest.PayrollDetails, 
-                opt => opt.MapFrom(src => src.PayrollDetails));
+                    .ForMember(dest => dest.PayrollDetails,
+                        opt => opt.MapFrom(src => src.PayrollDetails))
+                    .ForMember(dest => dest.WorkerName,
+                        opt => opt.MapFrom(src => src.Worker.Name))
+                    .ForMember(dest => dest.WorkerIdCard,
+                        opt => opt.MapFrom(src => src.Worker.IdCard));
 
             //facturation
             CreateMap<CitiesToCreateDTO, Cities>();
@@ -74,7 +78,7 @@ namespace Backend.WebAPI.Mapper
             CreateMap<Cities, CitiesToListDTO>();
 
             CreateMap<ClientsToCreateDTO, Clients>();
-            CreateMap<ClientsToEditDTO,Clients>();
+            CreateMap<ClientsToEditDTO, Clients>();
             CreateMap<Clients, ClientsToListDTO>();
 
             CreateMap<InvoiceToCreateDTO, Invoice>();
@@ -87,7 +91,7 @@ namespace Backend.WebAPI.Mapper
 
 
             CreateMap<Account, AccountToListDTO>()
-                .ForMember(dto => dto.AccountTypeName, opt => 
+                .ForMember(dto => dto.AccountTypeName, opt =>
                 opt.MapFrom(src => src.AccountType.Name));
 
         }

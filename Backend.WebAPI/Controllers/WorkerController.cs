@@ -9,14 +9,14 @@ using Dtos = Backend.DTOs.Worker;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/workers")]
     [ApiController]
-    public class NWorkerController : ControllerBase
+    public class WorkerController : ControllerBase
     {
         private readonly IWorkersRepository _workersRepository;
         private readonly IMapper _mapper;
 
-        public NWorkerController(IWorkersRepository workersRepository, IMapper mapper)
+        public WorkerController(IWorkersRepository workersRepository, IMapper mapper)
         {
             _workersRepository = workersRepository;
             _mapper=mapper;

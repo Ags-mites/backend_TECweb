@@ -9,7 +9,7 @@ using Dtos = Backend.DTOs.Reason;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/reasons")]
     [ApiController]
     public class ReasonController : ControllerBase
     {
