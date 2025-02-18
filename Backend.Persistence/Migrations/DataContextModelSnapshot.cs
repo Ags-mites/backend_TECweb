@@ -237,7 +237,6 @@ namespace Backend.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("InvoiceNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -490,7 +489,7 @@ namespace Backend.Persistence.Migrations
             modelBuilder.Entity("Backend.Entities.PayrollHeader", b =>
                 {
                     b.HasOne("Backend.Entities.Worker", "Worker")
-                        .WithMany()
+                        .WithMany("PayrollHeader")
                         .HasForeignKey("Workerid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -516,6 +515,11 @@ namespace Backend.Persistence.Migrations
             modelBuilder.Entity("Backend.Entities.PayrollHeader", b =>
                 {
                     b.Navigation("PayrollDetails");
+                });
+
+            modelBuilder.Entity("Backend.Entities.Worker", b =>
+                {
+                    b.Navigation("PayrollHeader");
                 });
 #pragma warning restore 612, 618
         }

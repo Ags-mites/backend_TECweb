@@ -1,28 +1,15 @@
-﻿using Backend.DTOs.Cities;
-using Backend.DTOs.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Backend.DTOs.InvoiceDetail;
 
 namespace Backend.DTOs.Invoice
 {
     public class InvoiceToListDTO
     {
         public required int Id { get; set; }
-        public required string InvoiceNumber { get; set; } // Número de factura (generado automáticamente)
+        public required string InvoiceNumber { get; set; } 
         public required DateTime Date { get; set; }
-
-        // Relación con Ciudad
         public required int CityId { get; set; }
-        public required CitiesToListDTO City { get; set; }
-
-        // Relación con Cliente (opcional, si se desea asociar la factura a un cliente)
         public required int ClientId { get; set; }
-        public ClientsToListDTO Client { get; set; }
 
-        // Detalles de la factura
-        public required ICollection<InvoiceToListDTO> Details { get; set; }
+        public List<InvoiceDetailToListDTO> InvoiceDetails { get; set; } = new();
     }
 }

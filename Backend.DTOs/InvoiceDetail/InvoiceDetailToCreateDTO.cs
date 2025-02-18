@@ -9,13 +9,7 @@ namespace Backend.DTOs.InvoiceDetail
 {
     public class InvoiceDetailToCreateDTO
     {
-        public int Id { get; set; }
-
-        // Relación con la factura
-        public int InvoiceId { get; set; }
-        public InvoiceToCreateDTO Invoice { get; set; }
-
-        public string Article { get; set; }
+        public required string  Article { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
     }

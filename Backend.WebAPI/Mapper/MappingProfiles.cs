@@ -83,7 +83,9 @@ namespace Backend.WebAPI.Mapper
 
             CreateMap<InvoiceToCreateDTO, Invoice>();
             CreateMap<InvoiceToEditDTO, Invoice>();
-            CreateMap<Invoice, InvoiceToListDTO>();
+            CreateMap<Invoice, InvoiceToListDTO>()
+                .ForMember(dest => dest.InvoiceDetails,
+                opt => opt.MapFrom(src => src.Details));
 
             CreateMap<InvoiceDetailToCreateDTO, InvoiceDetail>();
             CreateMap<InvoiceDetailToEditDTO, InvoiceDetail>();

@@ -81,8 +81,7 @@ namespace Backend.WebAPI.Controllers
                 await _entryDetailRepository.AddAll(entryDetails);
             }
 
-            var responseDto = _mapper.Map<EntryHeaderToListDTO>(createdHeader);
-            return CreatedAtAction(nameof(GetById), new { id = createdHeader.Id }, responseDto);
+            return await GetById(createdHeader.Id);
         }
 
 

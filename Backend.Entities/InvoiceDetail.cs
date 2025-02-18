@@ -9,13 +9,11 @@ namespace Backend.Entities
     public class InvoiceDetail
     {
         public int Id { get; set; }
-
-        // Relación con la factura
-        public int InvoiceId { get; set; }
-        public Invoice Invoice { get; set; }
-
-        public string Article { get; set; }
+        public required string Article { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        
+        public int InvoiceId { get; set; }
+        public required Invoice Invoice { get; set; }
     }
 }

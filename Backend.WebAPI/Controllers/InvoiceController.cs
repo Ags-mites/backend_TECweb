@@ -1,98 +1,145 @@
-﻿using System.Data;
-using AutoMapper;
-using Backend.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using Backend.Persistence.Interfaces;
-using Backend.Persistence.Repositories;
-using Microsoft.AspNetCore.Mvc;
+using Backend.Entities;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Dtos = Backend.DTOs.Invoice;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Backend.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/invoices")]
     [ApiController]
     public class InvoiceController : ControllerBase
     {
-        private readonly IInvoiceRepository _invoiceRepository; // Cambiado a repositorio de facturas
+        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly IInvoiceDetailRepository _invoiceDetailRepository;
         private readonly IMapper _mapper;
 
-        public InvoiceController(IInvoiceRepository invoiceRepository, IMapper mapper)
+        public InvoiceController(IInvoiceRepository invoiceRepository, IInvoiceDetailRepository invoiceDetailRepository, IMapper mapper)
         {
-            _invoiceRepository = invoiceRepository; // Inyección del repositorio de facturas
+            _invoiceRepository = invoiceRepository;
+            _invoiceDetailRepository = invoiceDetailRepository;
             _mapper = mapper;
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult> GetAllInvoices() // Cambiado el nombre del método
+        public async Task<IActionResult> GetAllInvoicesWithDetails()
         {
-            var invoices = await _invoiceRepository.GetAllAsync(); // Obtiene una lista de facturas
-            var invoicesDto = _mapper.Map<List<Dtos.InvoiceToListDTO>>(invoices); // Mapea de Invoice a InvoiceToListDTO
+            var invoices = await _invoiceRepository
+                .GetQueryable()
+                .Include(i => i.Details)
+                .ToListAsync();
+
+            var invoicesDto = _mapper.Map<List<Backend.DTOs.Invoice.InvoiceToListDTO>>(invoices);
             return Ok(invoicesDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var invoice = await _invoiceRepository.GetByIdAsync(id); // Cambiado a factura
+            var invoice = await _invoiceRepository
+                .GetQueryable()
+                .Include(i => i.Details)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
             if (invoice == null)
-            {
-                return NotFound("Factura no encontrada");
-            }
-            var invoiceDto = _mapper.Map<Dtos.InvoiceToListDTO>(invoice); // Mapea factura a DTO
+                return NotFound();
+
+            var invoiceDto = _mapper.Map<Backend.DTOs.Invoice.InvoiceToListDTO>(invoice);
             return Ok(invoiceDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Dtos.InvoiceToCreateDTO invoiceToCreateDTO)
+        public async Task<IActionResult> Post([FromBody] Backend.DTOs.Invoice.InvoiceToCreateDTO invoiceDto)
         {
-            var invoiceToCreate = _mapper.Map<Invoice>(invoiceToCreateDTO); // Mapea DTO a entidad Invoice
-            var invoiceCreated = await _invoiceRepository.AddAsync(invoiceToCreate); // Agrega la factura
-            var invoiceCreateDTO = _mapper.Map<Dtos.InvoiceToListDTO>(invoiceCreated); // Mapea la factura creada a DTO
-            return Ok(invoiceCreateDTO);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var invoice = _mapper.Map<Invoice>(invoiceDto);
+            invoice.Details = [];
+
+            var createdInvoice = await _invoiceRepository.AddAsync(invoice);
+
+            if (invoiceDto.invoiceDetails?.Any() == true)
+            {
+                var invoiceDetails = _mapper.Map<List<InvoiceDetail>>(
+                    invoiceDto.invoiceDetails
+                );
+                foreach (var detail in invoiceDetails)
+                {
+                    detail.InvoiceId = createdInvoice.Id;
+                }
+                await _invoiceDetailRepository.AddAll(invoiceDetails);
+            }
+
+            return await GetById(createdInvoice.Id);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Dtos.InvoiceToEditDTO invoiceToEditDTO)
+        /* [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] Backend.DTOs.Invoice.InvoiceToEditDTO invoiceDto)
         {
-            if (id != invoiceToEditDTO.Id)
+            if (id != invoiceDto.Id)
+                return BadRequest("El ID proporcionado no coincide con el objeto.");
+
+            var invoiceToUpdate = await _invoiceRepository.GetQueryable()
+                .Include(i => i.Details)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (invoiceToUpdate == null)
+                return NotFound("Factura no encontrada.");
+
+            _mapper.Map(invoiceDto, invoiceToUpdate);
+
+            var newDetailsIds = invoiceDto.invoiceDetails?.Select(d => d.Id).ToList() ?? new List<int>();
+
+            var detailsToRemove = invoiceToUpdate.Details
+                .Where(id => !newDetailsIds.Contains(id.Id))
+                .ToList();
+
+            foreach (var detail in detailsToRemove)
             {
-                return BadRequest("Error en los datos de entrada");
-            }
-            var invoiceToUpdate = await _invoiceRepository.GetByIdAsync(id);
-            if (invoiceToUpdate is null)
-            {
-                return BadRequest("Id no encontrado");
+                invoiceToUpdate.Details.Remove(detail);
             }
 
-            _mapper.Map(invoiceToEditDTO, invoiceToUpdate); // Mapea el DTO a la entidad existente
+            foreach (var detailDto in invoiceDto.invoiceDetails)
+            {
+                var existingDetail = invoiceToUpdate.InvoiceNumber.FirstOrDefault(id => id.Id == detailDto.Id);
+                if (existingDetail != null)
+                {
+                    _mapper.Map(detailDto, existingDetail);
+                    existingDetail.UpdatedAt = DateTime.UtcNow;
+                }
+                else
+                {
+                    var newDetail = _mapper.Map<InvoiceDetail>(detailDto);
+                    newDetail.InvoiceId = id;
+                }
+            }
+
             var updated = await _invoiceRepository.UpdateAsync(id, invoiceToUpdate);
-            if (!updated)
-            {
-                return NoContent();
-            }
-            var invoice = await _invoiceRepository.GetByIdAsync(id);
-            var invoiceDto = _mapper.Map<Dtos.InvoiceToListDTO>(invoice); // Mapea la factura actualizada a DTO
-            return Ok(invoiceDto);
-        }
+            if (!updated) return StatusCode(500, "Error al actualizar la factura.");
 
+            var fullInvoice = await _invoiceRepository
+                .GetQueryable()
+                .Include(i => i.Details)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
+            var invoiceDtoResponse = _mapper.Map<Backend.DTOs.Invoice.InvoiceToListDTO>(fullInvoice);
+            return Ok(invoiceDtoResponse);
+        }
+ */
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var invoiceToDelete = await _invoiceRepository.GetByIdAsync(id);
+            var invoice = await _invoiceRepository.GetByIdAsync(id);
+            if (invoice == null) return NotFound();
 
-            if (invoiceToDelete is null)
-            {
-                return NotFound("Registro no encontrado");
-            }
+            await _invoiceDetailRepository.DeleteAsync(id);
+            await _invoiceRepository.DeleteAsync(id);
 
-            var deleted = await _invoiceRepository.DeleteAsync(invoiceToDelete);
-
-            if (!deleted)
-            {
-                return Ok("Error al eliminar el registro");
-            }
-
-            return Ok("Registro eliminado");
+            return NoContent();
         }
     }
 }
