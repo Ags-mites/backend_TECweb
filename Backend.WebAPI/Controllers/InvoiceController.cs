@@ -77,15 +77,15 @@ namespace Backend.WebAPI.Controllers
             return await GetById(createdInvoice.Id);
         }
 
-        /* [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Backend.DTOs.Invoice.InvoiceToEditDTO invoiceDto)
         {
             if (id != invoiceDto.Id)
                 return BadRequest("El ID proporcionado no coincide con el objeto.");
 
             var invoiceToUpdate = await _invoiceRepository.GetQueryable()
-                .Include(i => i.Details)
-                .FirstOrDefaultAsync(i => i.Id == id);
+    .Include(i => i.Details)
+    .FirstOrDefaultAsync(i => i.Id == id);
 
             if (invoiceToUpdate == null)
                 return NotFound("Factura no encontrada.");
@@ -94,8 +94,9 @@ namespace Backend.WebAPI.Controllers
 
             var newDetailsIds = invoiceDto.invoiceDetails?.Select(d => d.Id).ToList() ?? new List<int>();
 
+            // Se eliminan los detalles que ya no están presentes en el DTO
             var detailsToRemove = invoiceToUpdate.Details
-                .Where(id => !newDetailsIds.Contains(id.Id))
+                .Where(detail => !newDetailsIds.Contains(detail.Id))
                 .ToList();
 
             foreach (var detail in detailsToRemove)
@@ -103,33 +104,37 @@ namespace Backend.WebAPI.Controllers
                 invoiceToUpdate.Details.Remove(detail);
             }
 
+            // Se actualizan los detalles existentes y se agregan los nuevos
             foreach (var detailDto in invoiceDto.invoiceDetails)
             {
-                var existingDetail = invoiceToUpdate.InvoiceNumber.FirstOrDefault(id => id.Id == detailDto.Id);
+                var existingDetail = invoiceToUpdate.Details.FirstOrDefault(d => d.Id == detailDto.Id);
                 if (existingDetail != null)
                 {
                     _mapper.Map(detailDto, existingDetail);
-                    existingDetail.UpdatedAt = DateTime.UtcNow;
+                    //existingDetail.UpdatedAt = DateTime.UtcNow; // Remove this line as UpdatedAt does not exist
                 }
                 else
                 {
                     var newDetail = _mapper.Map<InvoiceDetail>(detailDto);
                     newDetail.InvoiceId = id;
+                    // Opcional: establecer CreatedAt si es necesario
+                    invoiceToUpdate.Details.Add(newDetail);
                 }
             }
 
             var updated = await _invoiceRepository.UpdateAsync(id, invoiceToUpdate);
-            if (!updated) return StatusCode(500, "Error al actualizar la factura.");
+            if (!updated)
+                return StatusCode(500, "Error al actualizar la factura.");
 
-            var fullInvoice = await _invoiceRepository
-                .GetQueryable()
+            var fullInvoice = await _invoiceRepository.GetQueryable()
                 .Include(i => i.Details)
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             var invoiceDtoResponse = _mapper.Map<Backend.DTOs.Invoice.InvoiceToListDTO>(fullInvoice);
             return Ok(invoiceDtoResponse);
+
         }
- */
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
