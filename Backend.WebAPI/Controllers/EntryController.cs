@@ -84,7 +84,6 @@ namespace Backend.WebAPI.Controllers
             return await GetById(createdHeader.Id);
         }
 
-
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] EntryHeaderToEditDTO entryHeaderDto)
         {
@@ -101,12 +100,8 @@ namespace Backend.WebAPI.Controllers
             _mapper.Map(entryHeaderDto, entryToUpdate);
             entryToUpdate.UpdatedAt = DateTime.UtcNow;
 
-            var newDetailsIds = entryHeaderDto.EntryDetails?.Select(d => d.Id).ToList() ?? new List<int>();
-
-            var detailsToRemove = entryToUpdate.EntryDetails
-                .Where(ed => !newDetailsIds.Contains(ed.Id))
-                .ToList();
-
+            var newDetailsIds = entryHeaderDto.EntryDetails?.Select(d => d.Id).Where(d => d > 0).ToList() ?? new List<int>();
+            var detailsToRemove = entryToUpdate.EntryDetails.Where(ed => !newDetailsIds.Contains(ed.Id)).ToList();
             foreach (var detail in detailsToRemove)
             {
                 entryToUpdate.EntryDetails.Remove(detail);
@@ -114,11 +109,14 @@ namespace Backend.WebAPI.Controllers
 
             foreach (var detailDto in entryHeaderDto.EntryDetails)
             {
-                var existingDetail = entryToUpdate.EntryDetails.FirstOrDefault(ed => ed.Id == detailDto.Id);
-                if (existingDetail != null)
+                if (detailDto.Id > 0)
                 {
-                    _mapper.Map(detailDto, existingDetail);
-                    existingDetail.UpdatedAt = DateTime.UtcNow;
+                    var existingDetail = entryToUpdate.EntryDetails.FirstOrDefault(ed => ed.Id == detailDto.Id);
+                    if (existingDetail != null)
+                    {
+                        _mapper.Map(detailDto, existingDetail);
+                        existingDetail.UpdatedAt = DateTime.UtcNow;
+                    }
                 }
                 else
                 {
@@ -131,16 +129,10 @@ namespace Backend.WebAPI.Controllers
 
             var updated = await _entryHeaderRepository.UpdateAsync(id, entryToUpdate);
             if (!updated) return StatusCode(500, "Error al actualizar el voucher.");
-
-            var fullEntry = await _entryHeaderRepository
-                .GetQueryable()
-                .Include(eh => eh.EntryDetails)
-                    .ThenInclude(ed => ed.Account)
-                .FirstOrDefaultAsync(eh => eh.Id == id);
-
-            var entryDto = _mapper.Map<EntryHeaderToListDTO>(fullEntry);
-            return Ok(entryDto);
+            return await GetById(entryToUpdate.Id);
         }
+
+
 
 
         [HttpDelete("{id}")]

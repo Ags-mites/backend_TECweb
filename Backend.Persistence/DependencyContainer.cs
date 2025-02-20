@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Backend.Persistence.Interfaces;
 using Backend.Persistence.Repositories;
+using Backend.Persistence.Services;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Backend.Persistence
@@ -22,6 +23,7 @@ namespace Backend.Persistence
         public static IServiceCollection AddRepositories(
             this IServiceCollection services
         ){
+            services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountTypeRepository, AccountTypeRepository>();
             services.AddScoped<IPayrollDetailRepository, PayrollDetailRepository>();
