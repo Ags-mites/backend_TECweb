@@ -421,7 +421,7 @@ namespace Backend.Persistence.Migrations
             modelBuilder.Entity("Backend.Entities.EntryDetail", b =>
                 {
                     b.HasOne("Backend.Entities.Account", "Account")
-                        .WithMany()
+                        .WithMany("EntryDetails")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -495,6 +495,11 @@ namespace Backend.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Worker");
+                });
+
+            modelBuilder.Entity("Backend.Entities.Account", b =>
+                {
+                    b.Navigation("EntryDetails");
                 });
 
             modelBuilder.Entity("Backend.Entities.AccountType", b =>

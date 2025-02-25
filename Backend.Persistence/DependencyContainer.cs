@@ -5,6 +5,7 @@ using Backend.Persistence.Interfaces;
 using Backend.Persistence.Repositories;
 using Backend.Persistence.Services;
 using System.Reflection.Metadata.Ecma335;
+using Backend.DTOs.AccountReports;
 
 namespace Backend.Persistence
 {
@@ -22,13 +23,16 @@ namespace Backend.Persistence
 
         public static IServiceCollection AddRepositories(
             this IServiceCollection services
-        ){
-            services.AddScoped<IReportService, ReportService>();
+        )
+        {
+            services.AddScoped<IReportService<BalanceSheetReportDTO>, BalanceSheetReportService>();
+            services.AddScoped<IReportService<IncomeStatementReportDTO>, IncomeStatementReportService>();
+
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountTypeRepository, AccountTypeRepository>();
             services.AddScoped<IPayrollDetailRepository, PayrollDetailRepository>();
             services.AddScoped<IPayrollHeaderRepository, PayrollHeaderRepository>();
-            services.AddScoped<IEntryHeaderRepository, EntryHeaderRepository >();
+            services.AddScoped<IEntryHeaderRepository, EntryHeaderRepository>();
             services.AddScoped<IEntryDetailRepository, EntryDetailRepository>();
             services.AddScoped<IReasonRepository, ReasonRepository>();
             services.AddScoped<IWorkersRepository, WorkersRepository>();

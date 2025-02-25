@@ -1,11 +1,10 @@
-using Backend.DTOs.AccountReports;
-using Backend.Entities;
-using Backend.Persistence.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Backend.Persistence.Interfaces
 {
-    public interface IReportService
+    public interface IReportService<T> where T : class
     {
-        Task<List<BalanceSheetReportDTO>> GenerateGroupedReportAsync();
+        Task<List<T>> GenerateGroupedReportAsync();
     }
 }

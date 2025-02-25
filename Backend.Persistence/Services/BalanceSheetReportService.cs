@@ -5,14 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace Backend.Persistence.Services
 {
-    public class ReportService : IReportService
+    public class BalanceSheetReportService : IBalanceSheetReportRepository
     {
         private readonly DataContext _context;
 
-        public ReportService(DataContext context)
+        public BalanceSheetReportService(DataContext context)
         {
             _context = context;
         }
@@ -22,7 +21,7 @@ namespace Backend.Persistence.Services
             var data = await _context.AccountTypes
                 .Where(at => at.Status == "Active")
                 .Include(at => at.Accounts)
-                .ThenInclude(a => a.EntryDetails)  
+                .ThenInclude(a => a.EntryDetails)
                 .Where(at => at.Accounts.Any(a => a.Status == "Active"))
                 .Select(at => new BalanceSheetReportDTO
                 {
