@@ -6,6 +6,7 @@ using Backend.Persistence.Repositories;
 using Backend.Persistence.Services;
 using System.Reflection.Metadata.Ecma335;
 using Backend.DTOs.AccountReports;
+using Backend.DTOs.PayrollReport;
 
 namespace Backend.Persistence
 {
@@ -27,6 +28,9 @@ namespace Backend.Persistence
         {
             services.AddScoped<IReportService<BalanceSheetReportDTO>, BalanceSheetReportService>();
             services.AddScoped<IReportService<IncomeStatementReportDTO>, IncomeStatementReportService>();
+            services.AddScoped<IReportService<PayrollPaymentReportDTO>, PayrollPaymentReportService>();
+            services.AddScoped<IReportService<PayrollReasonCrossReportDTO>, PayrollReasonCrossReportService>();
+            
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IAccountTypeRepository, AccountTypeRepository>();
